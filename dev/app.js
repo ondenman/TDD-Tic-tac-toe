@@ -4,6 +4,6 @@ export function resetBoard () {
     return {}
 }
 
-export function hasPlayerWon () {
+export function hasPlayerWon (player, board) {
     return false
 }
