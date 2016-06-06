@@ -19,17 +19,13 @@ describe('Dummy test', () => {
 describe('resetBoard', () => {
     it('Should reset plays and totals', () => {
         const before =  {
-            playsNoughts: 3,
-            playsCrosses: 3,
-            totalNoughts: 3,
-            totalCrosses: 6
+            NOUGHTS : { plays: 3, total: 3},
+            CROSSES : { plays: 6, total: 6}
         }
 
         const after = {
-            playsNoughts: 0,
-            playsCrosses: 0,
-            totalNoughts: 0,
-            totalCrosses: 0
+            NOUGHTS : { plays: 0, total: 0},
+            CROSSES : { plays: 0, total: 0}
         }
 
         expect(resetBoard(before))
@@ -46,35 +42,37 @@ describe('hasPlayerWon', () => {
         return total
     }
 
-    it('Should return boolean indicating whether player hsa won', () => {
+    it('Should return boolean indicating whether player has won', () => {
         let before = {
-            playsNoughts: 3,
-            playsCrosses: 2
+            NOUGHTS : { plays: 3},
+            CROSSES : { plays: 2}
         }
 
         WINNING_TOTALS.forEach ( v => {
-            before.totalNoughts = v 
-            before.totalNoughts = randomPlayTotal(2)
+            before.NOUGHTS.total = v 
+            before.CROSSES.total = randomPlayTotal(2)
 
             expect(hasPlayerWon(NOUGHTS, before))
                 .toEqual(true)
             expect(hasPlayerWon(CROSSES, before))
-                .toEqual(true)
+                .toEqual(false)
         })
 
-        before = {
-            playsNoughts: 3,
-            playsCrosses: 3
-        }
+        before.CROSSES.plays = 3
 
         WINNING_TOTALS.forEach ( v => {
-            before.totalNoughts = v 
-            before.totalNoughts = randomPlayTotal(3)
+            before.NOUGHTS.total = v
+            let totalCrosses = randomPlayTotal(3)
+             do { 
+                before.CROSSES.total = totalCrosses
+                randomPlayTotal(3)
+                totalCrosses = randomPlayTotal(3)
+             } while ( WINNING_TOTALS.indexOf(totalCrosses > -1))
 
             expect(hasPlayerWon(NOUGHTS, before))
                 .toEqual(true)
             expect(hasPlayerWon(CROSSES, before))
-                .toEqual(true)
+                .toEqual(false)
         })
     })
 })
