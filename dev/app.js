@@ -2,15 +2,13 @@
 
 import { 
     NOUGHTS, 
-    CROSSES, 
-    WINNING_TOTALS, 
-    BOARD_VALUES 
+    CROSSES,
 } from './constants.js'
 
 import Combinatorics from 'js-combinatorics'
 
 module.exports = {
-
+    
     resetBoard: function() {
         return { 
             noughts: [],
@@ -28,12 +26,12 @@ module.exports = {
     },
 
     hasPlayerWon: function(state) {
+        // Winning combination is determined by magic square:
+        // http://mathworld.wolfram.com/MagicSquare.html
         // A winning line will always add up to 15
         // 4   9   2
         // 3   5   7
         // 8   1   6
-        // Winning combination is determined by magic square:
-        // http://mathworld.wolfram.com/MagicSquare.html
         let arr = state[state.player]
         if (arr.length < 3) return false
 
