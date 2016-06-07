@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "test.spec.js",
-  "transform": [["babelify", { "comments": false }]],
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
   "scripts": {
     "test": "mocha dev/tests --compilers js:babel-register",
     "build": "browserify dev/app.js -t babelify --outfile dist/app.js && cp dev/index.html dist/index.html"
@@ -17,7 +24,8 @@
     "browserify": "^13.0.1",
     "expect": "^1.20.1",
     "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "js-combinatorics": "^0.5.2"
   }
 }
-
-
